@@ -6,19 +6,19 @@ import { CreateInvoice } from "@/app/ui/invoices/buttons";
 import { lusitana } from "@/app/ui/fonts";
 import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
-import { Metadata } from 'next';
- 
+import { Metadata } from "next";
+
 export const metadata: Metadata = {
-  title: 'Invoices',
+  title: "Invoices",
 };
 
 export default async function Page(props: {
-  searchParams?: Promise<{
+  searchParams?: {
     query?: string;
     page?: string;
-  }>;
+  };
 }) {
-  const searchParams = await props.searchParams;
+  const searchParams = props.searchParams;
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchInvoicesPages(query);
